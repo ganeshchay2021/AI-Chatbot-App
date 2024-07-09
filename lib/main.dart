@@ -10,16 +10,29 @@ void main() async {
   Gemini.init(apiKey: apiKey);
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  await Future.delayed(
-    const Duration(milliseconds: 1000),
-  );
-  FlutterNativeSplash.remove();
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  initialization()async{
+    await Future.delayed(
+    const Duration(milliseconds: 1500),
+  );
+  FlutterNativeSplash.remove();
+  }
+
+  @override
+  void initState() {
+    initialization();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
